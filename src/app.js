@@ -8,6 +8,8 @@ const weather = require('./weather')
 //Creating object for the server
 const app = express()
 
+const port = process.env.PORT || 5000
+
 //Defining path for express server
 const viewsPath = path.join(__dirname,'../templates/views')
 const partialsPath = path.join(__dirname,'../templates/partials')
@@ -59,6 +61,6 @@ app.get('*',(req,response) => {
 })
 
 //Starting the server
-app.listen(5000, () => {
-    console.log('Server started and listening on port 5000')
+app.listen(port, () => {
+    console.log('Server started and listening on port '+port)
 })

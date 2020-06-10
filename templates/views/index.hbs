@@ -45,7 +45,7 @@
         Form.addEventListener('submit', (e)=> {
             e.preventDefault()
 
-            fetch('http://localhost:5000/temp').then((response)=>{
+            fetch('/temp').then((response)=>{
             response.json().then((data) => {
                 if(data.error){
                     console.log(data.error)
