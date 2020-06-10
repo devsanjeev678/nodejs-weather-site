@@ -37,7 +37,7 @@ app.get('/about', (req, response) => {
     response.render('about', {title: 'About'})
 })
 
-
+// HTTP Endpoint for weather
 app.get('/temp', (req,response) => {
 
     weather('1264527',(error,data)=>{
