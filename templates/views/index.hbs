@@ -44,8 +44,9 @@
 
         Form.addEventListener('submit', (e)=> {
             e.preventDefault()
+            const cityname = search.value
 
-            fetch('/temp').then((response)=>{
+            fetch('/temp?city='+cityname).then((response)=>{
             response.json().then((data) => {
                 if(data.error){
                     console.log(data.error)

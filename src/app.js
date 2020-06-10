@@ -42,7 +42,11 @@ app.get('/about', (req, response) => {
 // HTTP Endpoint for weather
 app.get('/temp', (req,response) => {
 
-    weather('1264527',(error,data)=>{
+    if(!req.query.city){
+        return response.send({error: 'you must provide a city name'})
+    }
+
+    weather(req.query.city,(error,data)=>{
 
              if(error){
                 return response.send({ error })

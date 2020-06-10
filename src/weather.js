@@ -12,16 +12,18 @@ const request = require('request')
 // API call - http://api.openweathermap.org/data/2.5/forecast?id=1264527&APPID=11931ff206a96b3781e758eb273709bc
 
 // error {"cod":"400","message":"126452sdada7 is not a city ID"}
-const getTemp = (cityId, callback) => {
+const getTemp = (city, callback) => {
 
-    const myurl = 'https://api.openweathermap.org/data/2.5/forecast?id='+cityId+'&units=metric&APPID=11931ff206a96b3781e758eb273709bc'
+    const myurl = 'https://api.openweathermap.org/data/2.5/forecast?q='+city+'&units=metric&APPID=11931ff206a96b3781e758eb273709bc'
 
     request({url: myurl, json: true}, (error, response) => {
         if(error){
             callback('Unable to connect to API', undefined)
         } else if(response.body.cod === '400'){
             callback('Unable to fetch weather data, pls provide correct city id', undefined)
-        } else {
+        } else if(response.body.cod === '404') {
+            callback('City not found', undefined)
+        }else if(response.body.cod === '200'){
             callback(undefined, response.body.list[2].main.temp_max)
         }
         // const dataBody = JSON.parse(response.body)
